@@ -1,24 +1,16 @@
 # learning-vue
 
-## Project setup
-```
-npm install
-```
+and Firebase!
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Starting 28/03/2022
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## NOMENCLATURA: TIP, TODO, FIX.
 
-### Lints and fixes files
-```
-npm run lint
-```
+* //TIP-components: Trucs i consells sobre components
+* //TIP-routing: Trucs i consells sobre routing
+* //TIP-style: Trucs i consells sobre ús d'estils
+* //TIP-firebase: Trucs i consells sobre Firebase
+  ...
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+  //TODO - Els todos
+  //FIX - Coses pendents d'arreglar
