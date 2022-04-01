@@ -8,6 +8,7 @@
     <div class="modal-body">
       <div class="row">
         <div class="col-md-12">
+          <!-- //TIP-HTML no validate form -->
           <form class="needs-validation" novalidate>
             <div class="row g-3">
               <div class="col-sm-12 text-start">
@@ -23,7 +24,7 @@
               </div>
               <div class="col-sm-12 text-start">
                 <label for="username" class="form-label">Username</label>
-                <div class="input-group has-validation">
+                <div class="input-group has-validation username-group">
                   <span class="input-group-text">@</span>
                   <input v-model="dataForm.username" type="text" class="form-control" id="username" required />
                   <div class="invalid-feedback">Your username is required.</div>
@@ -70,49 +71,63 @@
 </template>
 
 <script>
+
 export default {
   //TIP-components - No fa falta posar el nom aqui
   name: 'NovaEntrada',
   data() {
     return {
+      // prettier-ignore
       dataForm: {
-        firstname: '',
-        lastname: '',
-        username: '',
-        address: '',
-        email: '',
-        country: ''
+        firstname: '', lastname: '', username: '', address: '', email: '', country: ''
       }
     }
   },
   methods: {
     guardarDades() {
-      //Tancar Modal
-      this.closeModal()
-      //Store the new user
-      this.$store.commit('afegirUsuari', this.dataForm);
-      //Clear the form
-      for (const property in this.dataForm)
-        this.dataForm[property] = ''
+
+      //Validate data
+      if (this.validateInput(this.dataForm)) {
+        //Store the new user
+        this.$store.commit('afegirUsuari', this.dataForm);
+
+        //Clear the form
+        for (const property in this.dataForm)
+          this.dataForm[property] = ''
+
+        //Close the modal
+        this.closeModal()
+      }
+      else {
+        // Do nothing
+      }
     },
     /**
      * Close the Modal. 
      * //FIX No acaba de tancar bé, ja que s'ha de clicar 2 pics per obrir el modal després.
      */
     closeModal() {
-      document.getElementById("novaEntradaModal").classList.toggle("show")
-      document.getElementById("novaEntradaModal").style.display = "none"
-      document.getElementById("novaEntradaModal").removeAttribute("role")
-      document.getElementById("novaEntradaModal").removeAttribute("aria-modal")
-      document.getElementById("novaEntradaModal").setAttribute("aria-hidden", true)
+      let novaEntradaModal = document.getElementById("novaEntradaModal")
+      novaEntradaModal.classList.toggle("show")
+      novaEntradaModal.style.display = "none"
+      novaEntradaModal.removeAttribute("role")
+      novaEntradaModal.removeAttribute("aria-modal")
+      novaEntradaModal.setAttribute("aria-hidden", true)
       document.querySelector("body").classList.toggle("modal-open")
       document.querySelector("body").style = ""
       document.querySelector(".modal-backdrop").remove()
+    },
+
+    validateInput(dataForm) {
+      if (!dataForm.username) {
+        //TIP-BS validation in bootstrap
+        document.querySelector(".username-group .invalid-feedback").style.display = "block"
+        return false
+      }
+
+      return true
     }
   },
 
 }
 </script>
-
-<!-- //TIP-style Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
