@@ -41,7 +41,6 @@ th,
 td {
   padding: 15px;
   background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
 }
 
 th {
